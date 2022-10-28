@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <form style=>
+        <form>
             <table style="border: 3px solid #000; text-align:center; background-color: rgb(34, 34, 34);">
                 <tr style="text-align:center;">
                     <td colspan="5">
@@ -81,7 +81,7 @@
                         style="width:55px">
                     </td>
                     <td rowspan="2">
-                        <input type="button" value="=" onClick="operaciones('igual'); return false;" style="height:50px; width:55px;">
+                        <input type="button" value="=" onClick="operaciones('igual'); return false;" style="height:50px; width:55px; background:rgb(20, 117, 64);">
                     </td>
                     <td>
                         <input type="button" value="√ " onClick="operaciones('raiz'); return false;" style="width:55px">
@@ -120,7 +120,13 @@
                     },
                     dividir: function dividirNumeros(n1, n2) {
                         return (parseInt(n1) / parseInt(n2));
-                    }
+                    },
+                    elevar: function elevarNumeros(n1,n2) {
+                        return (Math.pow(parseInt(n1), parseInt(n2)));
+                    },
+                    raiz: function raizNumeros(n1) {
+                        return (Math.sqrt(parseInt(n1)));
+                    },
                 };
                 var operacion;
                 switch (op) {
@@ -138,7 +144,8 @@
                     break;
                     case 'multiplicar':
                         var operando1 = document.getElementById("resultado").value;
-                        document.getElementById("resultado").value = operando1 + "*";                            operacion = document.getElementById("resultado").value;
+                        document.getElementById("resultado").value = operando1 + "*";
+                        operacion = document.getElementById("resultado").value;
                         document.getElementById("memoria").value = "multiplicacion";
                     break;
                     case 'dividir':
@@ -146,6 +153,18 @@
                         document.getElementById("resultado").value = operando1 + "/";
                         operacion = document.getElementById("resultado").value;
                         document.getElementById("memoria").value = "division";
+                    break;
+                    case 'elevar':
+                        var operando1 = document.getElementById("resultado").value;
+                        document.getElementById("resultado").value = operando1 + "^";
+                        operacion = document.getElementById("resultado").value;
+                        document.getElementById("memoria").value = "elevacion";
+                    break;
+                    case 'raiz':
+                        var operando1 = document.getElementById("resultado").value;
+                        document.getElementById("resultado").value = operando1 + "√";
+                        operacion = document.getElementById("resultado").value;
+                        document.getElementById("memoria").value = "raizde";
                     break;
                     case 'igual':
                         operacion = document.getElementById("resultado").value;
@@ -168,6 +187,16 @@
                             case 'division':
                                 var operandos = operacion.split("/");
                                 var resultado = ops.dividir(operandos[0], operandos[1]);
+                                document.getElementById("resultado").value = resultado;
+                            break;
+                            case 'elevacion':
+                                var operandos = operacion.split("^");
+                                var resultado = ops.elevar(operandos[0], operandos[1]);
+                                document.getElementById("resultado").value = resultado;
+                            break;
+                            case 'raizde':
+                                var operandos = operacion.split("√");
+                                var resultado = ops.raiz(operandos[0]);
                                 document.getElementById("resultado").value = resultado;
                             break;
                         }
